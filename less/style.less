@@ -1,0 +1,40 @@
+/*
+ * Dependencies
+ */
+@import 'base'
+@import 'micro-grid'
+
+/*
+ * grid setup
+ * @gutter & @width
+ */
+@gutter: 3%;
+@width: 100%;
+
+/*
+ * Desktop style
+ */
+body { }
+
+/* 
+ * Mobile style
+ */
+@media handheld, only screen and (max-width: 767px) {
+
+    .grid {
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 0; 
+        width: 100%; }
+
+    [class*='col-'] {
+        float: none;
+        margin-right: 0; 
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 0; 
+        width: auto; }
+
+    // start editing from here
+}

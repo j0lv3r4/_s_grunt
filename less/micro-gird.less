@@ -1,0 +1,23 @@
+/* micro-grid.less v1 | MIT License | jolv.me/micro-grid */
+
+@gutter: 1%; 
+@width: 100%; 
+@grid-size: 12; 
+
+.cols ( @num-of-cols ) {
+    @col-size: ( @width / @grid-size ); 
+    @cols: ( @width / ( @col-size * @num-of-cols ) );
+    width: ( @width - ( @gutter * ( @cols - 1 ) ) ) / @cols; 
+}
+
+.row { 
+    display: table;
+    width: 100%; 
+}
+
+[class*='col-'] {
+    float: left;
+    margin: 0 @gutter 0 0; 
+}
+
+.last { margin-right: 0; }
