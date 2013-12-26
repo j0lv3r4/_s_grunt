@@ -76,11 +76,19 @@ add_action( 'widgets_init', 'microwp_widgets_init' );
  * Enqueue scripts and styles.
  */
 function microwp_scripts() {
+
+    // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
+    // http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+    
 	wp_enqueue_style( 'microwp-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'microwp-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( 'microwp-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+    
+	wp_enqueue_script( 'microwp-script', get_template_directory_uri() . '/js/script.min.js', array(), false, true );
+
+    wp_enqueue_script("jquery");
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

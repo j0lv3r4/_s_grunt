@@ -5,7 +5,7 @@
  * @package MicroWP
  */
 ?>
-	<div id="secondary" class="widget-area" role="complementary">
+	<div id="secondary" class="widget-area col-4 last" role="complementary">
 		<?php do_action( 'before_sidebar' ); ?>
 		<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
