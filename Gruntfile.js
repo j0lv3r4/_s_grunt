@@ -14,16 +14,16 @@ module.exports = function(grunt) {
             },
             js: {
                 files: 'js/script.js',
-                tasks: 'uglify:dist'
+                tasks: 'uglify'
             },
             img: {
                 files: 'images/*.{png, jpg, jpeg, gif}',
-                tasks: 'imagemin:dist'
+                tasks: 'imagemin'
             }
         },
 
         imagemin: {
-            dist: {
+            target: {
                 options: {
                     optimizationLevel: 7,
                     progressive: true
@@ -38,50 +38,46 @@ module.exports = function(grunt) {
         },
 
         autoprefixer: {
-            dist: {
-                options: {
-                    browsers:['last 2 versions', 'ie 8', 'ie 7']  
-                },
-                files: {
-                    'style.css': ['style.css']
-                }
+            options: {
+                browsers:['last 2 versions', 'ie 8', 'ie 7']
+            },
+            target: {
+                src: 'style.css',
+                dest: 'style.css'
             }
         },
 
         uglify: {
-            dist: {
-                options: {
-                    mangle: true,
-                    compress: true,
-                    report: 'gzip'
-                },
-                files: {
-                    'js/script.min.js': 'js/script.js'
-                }
+            options: {
+                mangle: true,
+                compress: true,
+                report: 'gzip'
+            },
+            target: {
+                src: 'js/script.js',
+                dest: 'js/script.min.js'
             }
         },
 
         less: {
-            dist: { 
-                options: {
-                    syncImport: true,
-                    report: 'gzip'
-                },
-                files: {
-                    'style.css': 'less/style.less'
-                }
+            options: {
+                syncImport: true,
+                report: 'gzip'
+            },
+            target: {
+                src: 'less/style.less',
+                dest: 'style.css'
             }
         },
 
         cssmin: {
-            dist: {
-                options: {
-                    keepSpecialComments: "*",
-                    report: 'gzip',
-                },
-                files: {
-                    'style.css': 'style.css'    
-                }
+            options: {
+                keepSpecialComments: "*",
+                report: 'gzip',
+            },
+            target: {
+                src: 'style.css',
+                dest: 'style.css'
             }
         },
         
@@ -120,14 +116,14 @@ module.exports = function(grunt) {
     grunt.registerTask('default', function() {
         grunt.task.run([
             'watch'
-        ]); 
+        ]);
     });
 
     grunt.registerTask('build', function() {
         grunt.task.run([
-            'imagemin:dist',
-            'rsync'
-        ]); 
+            'rsync',
+            'imagemin:dist'
+        ]);
     });
 
     // deploy to ftp :D !
@@ -136,7 +132,4 @@ module.exports = function(grunt) {
             'ftp-deploy:build'
         ]);
     });
-
-
-
 };
