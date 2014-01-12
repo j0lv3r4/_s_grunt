@@ -9,17 +9,9 @@ module.exports = function(grunt) {
                 files: '*/*'
             },
             css: {
-                files: 'less/*.less',
-                tasks: ['less', 'autoprefixer', 'cssmin']
+                files: 'src/less/*.less',
+                tasks: ['less', 'autoprefixer']
             },
-            js: {
-                files: 'js/script.js',
-                tasks: 'uglify'
-            },
-            img: {
-                files: 'images/*.{png, jpg, jpeg, gif}',
-                tasks: 'imagemin'
-            }
         },
 
         imagemin: {
@@ -30,7 +22,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'images/',
+                    cwd: 'images',
                     src: '*.{png,jpg,jpeg,gif}',
                     dest: 'theme/images'
                 }]
@@ -54,7 +46,7 @@ module.exports = function(grunt) {
                 report: 'gzip'
             },
             target: {
-                src: 'js/script.js',
+                src: 'src/js/script.js',
                 dest: 'js/script.min.js'
             }
         },
@@ -65,8 +57,9 @@ module.exports = function(grunt) {
                 report: 'gzip'
             },
             target: {
-                src: 'less/style.less',
-                dest: 'style.css'
+                files: {
+                    'style.css': 'src/less/style.less'
+                }
             }
         },
 
@@ -84,7 +77,7 @@ module.exports = function(grunt) {
         rsync: {
             options: {
                 args: ["--verbose"],
-                exclude: [".git*", "node_modules", "less", "*.less", "*.md", "*~", "*.swp", "theme", ".*", "package.json", "Gruntfile.js"],
+                exclude: [".git*", "node_modules", "src", "*.md", "*~", "*.swp", "theme", ".*", "package.json", "Gruntfile.js"],
                 recursive: true
             },
 
@@ -121,6 +114,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', function() {
         grunt.task.run([
+            'cssmin',
+            'uglify',
             'rsync',
             'imagemin'
         ]);
